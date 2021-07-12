@@ -1,0 +1,7 @@
+Django
+django-modeltranslation
+django-meta
+django-tinymce
+django-simple-open-graph
+django-rest-framework
+django-filter

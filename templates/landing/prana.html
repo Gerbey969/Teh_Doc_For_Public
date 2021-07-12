@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load simple_open_graph static i18n %}
+
+{% block extra_head %}
+    <title>{{ prana.name }}</title>
+    {% opengraph_meta "url='url', title='{{ prana.name }}', type='website', description='Description', image='Image.url'" %}
+    <meta name='title' content='{{ prana.name }}'>
+{% endblock %}
+{% block content %}
+    <div class="prana_cont">
+        <a class="back" href="{% url 'country' country.id %}"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 2" id="Layer_2"><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></g></svg></a>
+        <div class="row" style="margin-top: 25px!important;">
+            {% if user.is_authenticated.name == 'zavod' %}
+                <h2 style="text-transform: uppercase;">{{ prana.name }}</h2>
+                <img src="{{ prana.image.url }}" alt="{{ prana.name }}" class="prana">
+                <div class="row view tech" id="techical">
+                    <div class="row">
+                    {% if revision or date %}
+                        <button type="button" class="btn btn-success" onclick="location.href='{% url "revision" country.id prana.id date.id %}'">{{ date.name }}<br>{{ date.date }}</button>
+                        {% for rev in revision %}
+                            {% if rev.id == date.id %}
+                            {% else %}
+                                <button type="button" class="btn btn-secondary" onclick="location.href='{% url "revision" country.id prana.id rev.id %}'">{{ rev.name }}<br>{{ rev.date }}</button>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+            {% elif user.is_authentificated or not user.is_authentificated %}
+                {% for tit in titles %}
+                <div class="model"><a class="techical active">
+                        {{ tit.teh_har }}</a></div>
+                {% if garantiya %}
+                    <div class="model"><a class="garantiya" id="gar">{{ tit.garantiya }}
+                    </a></div>
+                {% endif %}
+                {% endfor %}
+                <hr>
+                <div class="row" style="margin-bottom: 25px!important;">
+                    <div class="row view tech" id="techical">
+                        <h2 style="text-transform: uppercase;">{{ prana.name }}</h2>
+                        <img src="{{ prana.image.url }}" alt="{{ prana.name }}" class="prana">
+                        <div class="row">
+                        {% if revision or date %}
+                            <button type="button" class="btn btn-success" onclick="location.href='{% url "revisions" country.id prana.id date.id %}'">{{ date.name }}<br>{{ date.date }}</button>
+                            {% for rev in revision %}
+                                {% if rev.id == date.id %}
+                                {% else %}
+                                     <button type="button" class="btn btn-secondary" onclick="location.href='{% url "revisions" country.id prana.id rev.id %}'">{{ rev.name }}<br>{{ rev.date }}</button>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    </div>
+                    <div class="row hide garant" id="vidhuk">
+                        {% if garantiya %}
+                            {% for gar in garantiya %}
+                                {{ gar.text|safe }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

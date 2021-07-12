@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load simple_open_graph static i18n %}
+
+{% block extra_head %}
+    <title>Feedback Form</title>
+    {% opengraph_meta "url='URL', title='Title', type='website', description='Description', image='Image'" %}
+    <meta name='title' content='Feedback Form'>
+{% endblock %}
+{% block content %}
+    <div class="prana_cont">
+    <form class="get-quote" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group" style="width: 100%">
+                <label for="inputEmail4">{% trans 'Name' %}</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group" style="width: 100%">
+                <label for="inputEmail4">{% trans 'Phone' %}</label>
+                {{ form.phone }}
+            </div>
+            <div class="form-group" style="width: 100%">
+                <label for="inputEmail4">Email</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group" style="width: 100%">
+                <label for="inputEmail4">{% trans 'Serial Number' %}</label>
+                {{ form.ser_num }}
+            </div>
+            <div class="form-group " style="width: 100%">
+                <label for="inputEmail4">{% trans 'Country' %}</label>
+                <div class="get-quote-row">{{ form.country }}</div>
+            </div>
+            <div class="form-group" style="width: 100%">
+                <label for="inputEmail4">{% trans 'Category' %}</label>
+                <div class="get-quote-row">{{ form.category }}</div>
+            </div>
+            <div class="form-group" style="width: 100%">
+                <label for="inputEmail4">{% trans 'Description' %}</label>
+                <div class="get-quote-row">{{ form.description }}</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">{% trans 'Send' %}</button>
+    </form>
+    </div>
+{% endblock %}

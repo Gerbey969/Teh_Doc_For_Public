@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load simple_open_graph static %}
+
+{% block extra_head %}
+    <title>{{ revision.name }}</title>
+    <meta name='title' content='{{ revision.name }}'>
+{% endblock %}
+{% block content %}
+    <div class="prana_cont">
+        <a class="back" href="{% url 'models' country.id prana.id%}"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 2" id="Layer_2"><path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/></g></svg></a>
+        <h1>{{ revision.name }}</h1>
+        <div class="row card-group">
+            {% if user.is_authenticated.name == 'zavod' %}
+                {% for zav in for_zav %}
+                    <div class="card">
+                        <img class="card-img-top" src="{{ zav.image.url }}" alt="{{ zav.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ zav.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ zav.name }}</a></h5>
+                            <a href="{{ zav.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                            <a href="{{ zav.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if all_doc %}
+                    {% for doc in all_doc %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ doc.image.url }}" alt="{{ doc.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ doc.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ doc.name }}</a></h5>
+                                    <a href="{{ doc.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                                    <a href="{{ doc.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+                {% if for_sep %}
+                    {% for doc in for_sep %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ doc.image.url }}" alt="{{ doc.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ doc.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ doc.name }}</a></h5>
+                                    <a href="{{ doc.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                                    <a href="{{ doc.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+            {% elif user.is_authenticated %}
+                {% for manager in for_man %}
+                    <div class="card">
+                        <img class="card-img-top" src="{{ manager.image.url }}" alt="{{ manager.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ manager.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ manager.name }}</a></h5>
+                            <a href="{{ manager.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                            <a href="{{ manager.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if all_doc %}
+                    {% for doc in all_doc %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ doc.image.url }}" alt="{{ doc.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ doc.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ doc.name }}</a></h5>
+                                    <a href="{{ doc.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                                    <a href="{{ doc.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+                {% if for_seperate %}
+                    {% for doc in for_sep %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ doc.image.url }}" alt="{{ doc.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ doc.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ doc.name }}</a></h5>
+                                    <a href="{{ doc.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                                    <a href="{{ doc.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+                {% if for_sep %}
+                    {% for doc in for_sep %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ doc.image.url }}" alt="{{ doc.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ doc.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ doc.name }}</a></h5>
+                                    <a href="{{ doc.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                                    <a href="{{ doc.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+                {% if for_s %}
+                    {% for doc in for_s %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ doc.image.url }}" alt="{{ doc.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ doc.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ doc.name }}</a></h5>
+                                    <a href="{{ doc.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                                    <a href="{{ doc.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+            {% else %}
+                {% if document %}
+                    {% for doc in document %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ doc.image.url }}" alt="{{ doc.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ doc.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ doc.name }}</a></h5>
+                                    <a href="{{ doc.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                                    <a href="{{ doc.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+                {% if for_seperate %}
+                    {% for doc in for_sep %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ doc.image.url }}" alt="{{ doc.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ doc.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ doc.name }}</a></h5>
+                                    <a href="{{ doc.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                                    <a href="{{ doc.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+                {% if for_s %}
+                    {% for doc in for_s %}
+                            <div class="card">
+                                <img class="card-img-top" src="{{ doc.image.url }}" alt="{{ doc.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title"><a href="{{ doc.document.url }}" class="file_button" style="display:block!important;text-align:center;padding: 0!important;max-width: 100%!important;width: 100%!important;" target="_blank">{{ doc.name }}</a></h5>
+                                    <a href="{{ doc.document.url }}" class="file_button" download><img height="20px" src="/media/images/download.png" alt="Download"></a>
+                                    <a href="{{ doc.document.url }}" class="file_button" target="_blank"><img height="25px" src="/media/images/eye.png" alt="Look"></a>
+                                </div>
+                            </div>
+                    {% endfor %}
+                {% endif %}
+        {% endif %}
+        </div>
+        <div class="row">
+            {% if youtube %}
+                {% for you in youtube %}
+                    <a class="file_button" href="{{ you.url }}" target="_blank"><img height="20px" src="/media/images/youtube.png" alt="YouTube Prana">{{ you.name }}</a>
+                    <br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

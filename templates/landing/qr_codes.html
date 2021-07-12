@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load simple_open_graph static %}
+
+{% block extra_head %}
+    <title>QRCodes</title>
+    {% opengraph_meta "url='URL', title='QRCode Generator', type='website', description='Description', image='Image.url'" %}
+    <meta name='title' content='QR Codes'>
+{% endblock %}
+{% block content %}
+    <div class="prana_cont">
+        <form action="." method="post">
+            <div class="form-group mb-2">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Generate</button>
+            </div>
+        </form>
+        {% if qr_codes %}
+            <div class="row card-group">
+            {% for qr in qr_codes %}
+                <div class="card">
+                    <img class="card-img-top" src="{{ qr.qr_code.url }}" alt="{{ qr.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ qr.name }}</h5>
+                        <a href="{{ qr.qr_code.url }}" download="{{ qr.name }}"><button type="button" class="btn btn-success">Download .PNG</button></a>
+                        <a href="{{ qr.svg.url }}" download="{{ qr.name }}"><button type="button" class="btn btn-success">Download .SVG</button></a>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

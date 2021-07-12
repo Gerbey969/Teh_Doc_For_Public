@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load simple_open_graph static %}
+
+{% block extra_head %}
+    <title>Home</title>
+    {% opengraph_meta "url='URL', title='Description', type='website', description='Description', image='Image.url'" %}
+    <meta name='title' content='Home'>
+{% endblock %}
+{% block content %}
+    <div class="container">
+    {% if country %}
+        <div class="row">
+        {% for count in country %}
+            <figure class="categories_4 oncategories_1">
+                <div class="oncategories">
+                    <a href="{%  url 'country' count.id %}"><img src="{{ count.image.url }}" alt='{{ count.name }}'></a>
+                </div>
+                <figcaption class="fig"><a href="{%  url 'country' count.id %}">{{ count.name }}</a></figcaption>
+            </figure>
+        {% endfor %}
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

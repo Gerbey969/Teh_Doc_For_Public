@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load simple_open_graph static i18n %}
+
+{% block extra_head %}
+    <title>{{ countries.name }}</title>
+    {% opengraph_meta "url='URL', title='Title', type='website', description='Description', image='IMG URL'" %}
+{% endblock %}
+{% block content %}
+    <div class="prana_cont">
+        <div class="row">
+            <h2>Download</h2>
+            <div class="row">
+                {% for ap in app %}
+                    {% if ap.inactive is True %}
+                        <div class="download__model filtered"><a class="download__button"><img src="{{ ap.image.url }}"></a></div>
+                    {% else %}
+                        <div class="download__model"><a class="download__button" href="{{ ap.url }}"><img src="{{ ap.image.url }}"></a></div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

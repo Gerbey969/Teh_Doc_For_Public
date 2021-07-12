@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load simple_open_graph static i18n %}
+
+{% block extra_head %}
+    <title>Login</title>
+    <meta name='title' content='Login'>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row login">
+            <h1>Log-in</h1>
+            <form action="." method="post">
+                <div class="form-group mb-2">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Log-in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
